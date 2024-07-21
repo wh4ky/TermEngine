@@ -20,9 +20,9 @@ Replaces the value on canvas `x` and `y` coordinates with `new_value`.
 
 ## `void allocScreen()`
 
-Allocates heap memmory for the canvas.  
+Allocates heap memory for the canvas.  
 
 ## `void  deAllocScreen()`
 
-De-allocates heap memmory for the canvas.  
+De-allocates heap memory for the canvas.  
 Use at the end of the program, when you want to change the resolution or you want to allocate the canvas again.  

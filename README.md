@@ -18,6 +18,6 @@ Whacky Engine is an engine which allows you to do stuff on the terminal with [AS
 
 ## How to use
 
-Copy all of the header files from the [lib](./lib/) directory include `all.h` in your program.
+Copy all of the header files from the [lib](./lib/) directory and include `all.h` in your program.
 `all.h` includes all the header files, so you don't need to worry about including all the separate header files one-by-one.  
 Read the [documentation](./docs/DOCS.md).

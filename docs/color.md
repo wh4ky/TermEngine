@@ -1,4 +1,4 @@
-# color.h
+# color.hpp
 
 Help with colors can be found [here](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors).
 

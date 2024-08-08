@@ -4,20 +4,45 @@
 
 - [About](#about)
 - [Future Development](#future-development)
-- [How to use](#how-to-use)
+- [Installing And Using](#installing-and-using)
 
 ## About
 
-Whacky Engine is an engine which allows you to do stuff on the terminal with [ASCII](https://en.wikipedia.org/wiki/ASCII) and [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
+Whacky-Engine (WE for short) is an engine which allows you to do stuff on the terminal with [ASCII](https://en.wikipedia.org/wiki/ASCII) and [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
 ## Future Development
 
-- Something I won't abandon (optional).  
-- Shapes
-- More optimized rendering
+- Something I won't abandon.
+- Make shape-making easier.
+- More optimized rendering of the screen.
+- Support for use in other languages.
 
-## How to use
+## Installing And Using
 
-Copy all of the header files from the [lib](./lib/) directory and include `all.h` in your program.
-`all.h` includes all the header files, so you don't need to worry about including all the separate header files one-by-one.  
-Read the [documentation](./docs/DOCS.md).
+### Prerequisites
+
+- Cmake
+- Gcc/G++
+
+### Installing
+
+Instalation guide for Linux.
+
+- [Download](https://github.com/wh4ky/Whacky-Engine/archive/refs/heads/main.zip) the source code.
+- Unzip
+- Go into the root directory of the program (in your terminal).
+- And type the beneath commands into your terminal.
+
+```sh
+mkdir ./build
+cd build
+cmake ..
+make
+```
+
+### Using
+
+- Include the .hpp files you want to use in your program.
+- The library files should be in the /out directory.
+- To compile your program run: `G++ your_program.cpp path/to/Whacky-Engine_x.x.x.x`
+- Read the [documentation](./docs/DOCS.md).

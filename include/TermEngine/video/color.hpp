@@ -8,12 +8,12 @@
 
 #include <stdio.h>
 
-namespace WE
+namespace TE
 {
     class color
     {
         protected:
-            static constexpr char esc = '\033';
+            static constexpr const char esc = '\033';
             static constexpr const char* control = "[";
 
         public:

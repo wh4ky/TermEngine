@@ -6,27 +6,31 @@
 #ifndef VIDEO_HPP
 #define VIDEO_HPP
 
-#include <string.h>
+#include <string>
 #include <stdio.h>
+#include <new>
+#include <vector>
+#include <stdexcept>
 #include <stdlib.h>
 
-namespace WE
+namespace TE
 {
     class termScreen
     {
         private:
-            static char ***video;
+            static std::vector<std::vector<std::string>> *video;
             static int y_height;
             static int x_width;
 
         public:
             static void clear();
             static void setRes(int x, int y);
-            static void replace(int x, int y, const char *new_value);
+            static void cellSet(int x, int y, std::string new_value);
+            //static void termSet(char ***&preSetVideo);
             static void update();
+            static void fill();
             static void alloc();
             static void deAlloc();
-
     };
 }
 

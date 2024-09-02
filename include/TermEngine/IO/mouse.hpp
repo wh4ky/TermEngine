@@ -6,7 +6,6 @@
 #ifndef MOUSE_HPP
 #define MOUSE_HPP
 
-#include <SDL2/SDL.h>
 #include <iostream>
 #include <unistd.h>
 #include <termios.h>

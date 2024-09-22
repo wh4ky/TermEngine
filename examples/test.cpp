@@ -1,60 +1,140 @@
-// g++ -std=c++17 ./examples/main.cpp -L./out -lstatTermEngine_0.0.0
+// TEST do not use
 
 #include <iostream>
 #include <unistd.h>
 #include <termios.h>
+#include <signal.h>
+#include <string>
+#include <tuple>
 
-void enableMouseReporting()
+namespace TE
 {
-    std::cout << "\033[?1003h";
-    std::cout.flush();
-}
+    class IO
+    {
+    private:
+        static struct termios original;
 
-void disableMouseReporting()
-{
-    std::cout << "\033[?1003l";
-    std::cout.flush();
-}
+        static void signalHandle(int signum)
+        {
+        revertTerminal();
+        disableMouseReporting();
+        exit(0);
+        }
 
-struct termios orig_termios;
+        static void disableMouseReporting()
+        {
+            std::cout << "\033[?1003l";
+            std::cout.flush();
+            std::cout << "\033[?1006l";
+            std::cout.flush();
+        }
 
-void restoreSettings()
-{
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
-    disableMouseReporting();
-}
+        static void enableMouseReporting()
+        {
+            std::cout << "\033[?1003h";
+            std::cout.flush();
+            std::cout << "\033[?1006h";
+            std::cout.flush();
+        }
 
-void enableRawMode()
-{
-    tcgetattr(STDIN_FILENO, &orig_termios);
-    atexit(restoreSettings);
-    struct termios raw = orig_termios;
-    raw.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
-}
+        static void revertTerminal()
+        {
+            tcsetattr(STDIN_FILENO, TCSANOW, &original);
+        }
 
-int main() {
-    enableRawMode();
-    enableMouseReporting();
+    public:
+        IO()
+        {
+            signal(SIGINT, signalHandle);
 
-    char buf[32];
+            std::cout << "\033[?1003h";
+            std::cout.flush();
+            std::cout << "\033[?1006h";
+            std::cout.flush();
 
-    std::cout << "Mouse reporting enabled. Move the mouse or click to see events.\n";
+            tcgetattr(STDIN_FILENO, &original);
+            struct termios raw = original;
+            raw.c_lflag &= ~(ICANON | ECHO);
+            tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+        }
 
-    while (true) {
-        int bytesRead = read(STDIN_FILENO, buf, sizeof(buf) - 1);
+        ~IO()
+        {
+            revertTerminal();
+            disableMouseReporting();
+        }
 
-        if (bytesRead > 0) {
+        void revertSettings()
+        {
+            revertTerminal();
+            disableMouseReporting();
+        }
+
+        std::string getKey() // function to get single keys (To Do: F-row and other keys)
+        {
+            disableMouseReporting();
+            char buf[10];
+            int bytesRead = read(STDIN_FILENO, buf, sizeof(buf) - 1);
             buf[bytesRead] = '\0';
 
-            std::cout << "Raw input: ";
-            for (int i = 0; i < bytesRead; ++i) {
-                std::cout << std::dec << std::uppercase << (int)(unsigned char)buf[i] << " ";
-            }
-            std::cout << std::dec << std::endl;
-            std::cout.flush(); 
+            std::string str(buf);
+
+            std::cout << str << " control" << std::endl;
+            
+            std::string out;
+            
+            
+
+            return out;
         }
+    };
+
+    /*  Function to get mouse clicks
+    std::tuple getMouse()
+        {
+            char buf[32];
+            int bytesRead = read(STDIN_FILENO, buf, sizeof(buf) - 1);
+
+            if (bytesRead <= 1)
+            {
+                buf[bytesRead] = '\0';
+
+                for (int i = 0; i < bytesRead; ++i) {
+                    printf("%c ", buf[i]);
+                }
+                std::cout.flush(); 
+
+                std::string str(buf);
+                return str;
+            }
+            return "null";
+        }
+    };
+    */
+
+    struct termios IO::original;
+}
+
+int main()
+{
+    TE::IO io;
+
+    while (true)
+    {
+        if (io.getKey() == "q")
+        {
+            io.revertSettings();
+            return 0;
+        }
+        
+        else if (io.getKey() != "null")
+        {
+            std::cout << io.getKey() << std::endl;
+        }
+
         usleep(1000);
     }
+
+    io.revertSettings();
     return 0;
 }

@@ -3,19 +3,24 @@
 ## Contents
 
 - [About](#about)
-- [Future Development](#future-development)
+- [Soon™](#soon)
+- [Aim Of The Game](#aim-of-the-game)
 - [Installing And Using](#installing-and-using)
 
 ## About
 
-Whacky-Engine (WE for short) is an engine which allows you to do stuff on the terminal with [ASCII](https://en.wikipedia.org/wiki/ASCII) and [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
+TermEngine (TE for short) is an engine which allows you to display and maybe make games in the terminal with [ASCII](https://en.wikipedia.org/wiki/ASCII) and [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 
-## Future Development
+## Soon™
 
 - Something I won't abandon.
-- Make shape-making easier.
-- More optimized rendering of the screen.
-- Support for use in other languages.
+- GameObjects (objects that contain all data needed for displaying, moving, ect.)
+- 3D rendering with OpenCL.
+- Lua bindings.
+
+## Aim Of The Game
+
+I want TE to be fully compatible with the TTY on unix systems.  
 
 ## Installing And Using
 
@@ -26,23 +31,24 @@ Whacky-Engine (WE for short) is an engine which allows you to do stuff on the te
 
 ### Installing
 
-Instalation guide for Linux.
+Installation guide for most Unix systems:
 
-- [Download](https://github.com/wh4ky/Whacky-Engine/archive/refs/heads/main.zip) the source code.
-- Unzip
+- Download the source code zip file.
+- Unzip the file.
 - Go into the root directory of the program (in your terminal).
-- And type the beneath commands into your terminal.
+- And type these commands into your terminal.
 
 ```sh
-mkdir ./build
 cd build
 cmake ..
 make
 ```
 
+These commands only compile the library statically; go to the root CMakeLists.txt for additional configuration options.
+
 ### Using
 
 - Include the .hpp files you want to use in your program.
 - The library files should be in the /out directory.
-- To compile your program run: `G++ your_program.cpp path/to/Whacky-Engine_x.x.x.x`
+- To compile your program run: `G++ your_program.cpp path/to/libTermEngine_x.x.x.x`
 - Read the [documentation](./docs/DOCS.md).

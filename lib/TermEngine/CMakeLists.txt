@@ -1,8 +1,4 @@
-# Enable static library
-option(ENABLE_STATIC "Enable static library" ON)
-
-# Enable dynamic library
-option(ENABLE_DYNAMIC "Enable dynamic library" ON)
+# Options defined in root CMakeLists.txt
 
 if(ENABLE_STATIC)
     # Output of the static lib
@@ -14,6 +10,15 @@ if(ENABLE_STATIC)
     video/color.cpp
     )
 
+    # Enable Lua bindings
+    #[[
+    if(ENABLE_LUA)
+        target_sources(TermEngine-Static PRIVATE
+        bindings/Lua.cpp 
+        )
+    endif()
+    ]]
+    
     # Static library properties
     set_target_properties(TermEngine-Static PROPERTIES
     OUTPUT_NAME stat${PROJECT_NAME}_${PROJECT_VERSION}
@@ -26,6 +31,15 @@ if(ENABLE_DYNAMIC)
     video/video.cpp
     video/color.cpp
     )
+
+    # Enable Lua bindings
+    #[[
+    if(ENABLE_LUA)
+        target_sources(TermEngine-Dynamic PRIVATE
+        bindings/Lua.cpp 
+        )
+    endif()
+    ]]
 
     # Dynamic library properties
     set_target_properties(TermEngine-Dynamic PROPERTIES

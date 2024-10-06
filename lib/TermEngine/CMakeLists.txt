@@ -21,7 +21,7 @@ if(ENABLE_STATIC)
     
     # Static library properties
     set_target_properties(TermEngine-Static PROPERTIES
-    OUTPUT_NAME stat${PROJECT_NAME}_${PROJECT_VERSION}
+    OUTPUT_NAME ${PROJECT_NAME}_${PROJECT_VERSION}
     )
 endif()
 
@@ -44,6 +44,6 @@ if(ENABLE_DYNAMIC)
     # Dynamic library properties
     set_target_properties(TermEngine-Dynamic PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/out
-    OUTPUT_NAME dyn${PROJECT_NAME}_${PROJECT_VERSION}
+    OUTPUT_NAME ${PROJECT_NAME}_${PROJECT_VERSION}
     )
 endif()

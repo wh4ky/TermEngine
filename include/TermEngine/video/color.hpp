@@ -11,7 +11,7 @@
 namespace TE {
 class color {
 protected:
-  static constexpr const char esc = '\033[';
+  static constexpr const char *esc = "\033[";
   static constexpr const char semicolon = ';';
   static constexpr const char *foregroundPrefix = "38;";
   static constexpr const char *backgroundPrefix = "48;";
